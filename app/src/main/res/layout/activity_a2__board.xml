@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#202641"
+    tools:context=".A2_Board">
+
+
+    <Button
+        android:id="@+id/button"
+        android:layout_width="165dp"
+        android:layout_height="74dp"
+        android:background="#4099E0"
+        android:shadowColor="#7D8DE9"
+        android:shadowDx="25"
+        android:shadowDy="25"
+        android:text="Play!"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+        android:textSize="20sp"
+        tools:layout_editor_absoluteX="123dp"
+        tools:layout_editor_absoluteY="355dp" />
+
+</android.support.constraint.ConstraintLayout>
