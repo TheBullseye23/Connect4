@@ -21,7 +21,6 @@ public class CustomView extends View {
 
     private Paint mPaint;
     private Canvas mCanvas;
-    private Bitmap newBitmap;
     private Rect mRect;
     private Bitmap mBitmap=null;
     private int BackgroundColor;
@@ -72,28 +71,27 @@ public class CustomView extends View {
         this.mHeigth = mHeigth;
         CellWidth = mWidth/9;
         CellHeigth = mHeigth/12;
+        mBitmap=Bitmap.createBitmap(mWidth,mHeigth, Bitmap.Config.ARGB_8888);
+        mCanvas=new Canvas(mBitmap);
+        mCanvas.drawColor(BackgroundColor);
         super.onSizeChanged(mWidth, mHeigth, oldw, oldh);
     }
 
     @Override
-    protected void onDraw(Canvas mCanvas) {
-        super.onDraw(mCanvas);
-        if(mBitmap==null)
-        {
-            mBitmap = Bitmap.createBitmap((int)mWidth, (int)mHeigth, Bitmap.Config.ARGB_8888);
-            mCanvas=new Canvas(mBitmap);
-        }
-        mCanvas.drawColor(BackgroundColor);
-        drawBoard(mCanvas);
+    protected void onDraw(Canvas canvas) {
+        super.onDraw(canvas);
+        mCanvas.drawBitmap(mBitmap,0,0,null);
+        drawBoard();
+        invalidate();
 
     }
 
-    public void drawBoard(Canvas mCanvas)
+    public void drawBoard()
     {   mRect.set((int)(1*CellWidth),(int)(3*CellHeigth),(int) (8*CellWidth), (int)(9*CellHeigth));         // Board
-        mCanvas.drawRect(mRect, mPaint);
+        this.mCanvas.drawRect(mRect, mPaint);
         for (int i = 0; i < 7; i++)
             for (int j = 0; j < 6; j++) {
-                mCanvas.drawCircle(CellWidth / 2 + (i + 1) * CellWidth, (3 * CellHeigth) + (j) * CellHeigth + CellWidth / 2, CellWidth / 2, kPaint);
+                this.mCanvas.drawCircle(CellWidth / 2 + (i + 1) * CellWidth, (3 * CellHeigth) + (j) * CellHeigth + CellWidth / 2, CellWidth / 2, kPaint);
                 a[i][j] = 0;
             }
 
@@ -109,6 +107,7 @@ public class CustomView extends View {
 
             count++;
             DropBead(x,y,count);
+            invalidate();
         }
 
         return true;
